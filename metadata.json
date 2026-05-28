@@ -1,0 +1,11 @@
+{
+  "name": "LinguaBot IELTS Speaker",
+  "description": "A real-time IELTS language practice partner with Supabase secure authentication and personalized dashboard.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

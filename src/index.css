@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-stone-105: #f4f3f2;
+  --color-stone-150: #ecebe9;
+  --color-stone-400: #575653;
+  --color-stone-500: #444341;
+  --color-stone-605: #4e4c4a;
+  --color-stone-850: #2c2a29;
+  --color-amber-55: #fefcf7;
+  --color-amber-502: #f59e0b;
+  --color-amber-750: #b45309;
+  --color-emerald-110: #d1fae5;
+}
+
+@layer utilities {
+  .bg-premium-dots {
+    background-image: radial-gradient(#eceae2 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .markdown-body p {
+    @apply mb-4 leading-relaxed;
+  }
+  .markdown-body p:last-child {
+    @apply mb-0;
+  }
+  .markdown-body strong {
+    @apply font-bold text-white;
+  }
+  .markdown-body em {
+    @apply italic;
+  }
+  .markdown-body ul {
+    @apply list-disc pl-5 mb-4 space-y-1;
+  }
+  .markdown-body ol {
+    @apply list-decimal pl-5 mb-4 space-y-1;
+  }
+  .markdown-body li::marker {
+    @apply text-neutral-500;
+  }
+
+  /* Accessibility overrides for WCAG minimum font-sizes */
+  [class*="text-[9px]"]:not([class*="font-mono"]) {
+    font-size: 11px !important;
+  }
+  [class*="text-[10px]"]:not([class*="font-mono"]) {
+    font-size: 12px !important;
+  }
+  [class*="text-[11px]"]:not([class*="font-mono"]) {
+    font-size: 12px !important;
+  }
+}
+

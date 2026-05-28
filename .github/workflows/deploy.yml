@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master, development ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: Build & Validate Applet
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-rate-limit: 'false'
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint & TypeScript validation
+        run: npm run lint
+
+      - name: Compile application (Vite & Express bundler)
+        run: npm run build
+        env:
+          NODE_ENV: production
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Deploy to Cloud Run (Staging / Production Mock)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          echo "Deploying to Google Cloud Run..."
+          # In actual deployment, authenticate with GCP and run:
+          # gcloud run deploy linguabot --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/linguabot --platform managed --region us-central1
+          echo "Successfully completed pipeline run!"
